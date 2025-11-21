@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banker's Algorithm Simulator</title>
+    <link rel="stylesheet" href="banker's-algorithm.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Banker's Algorithm Simulator</h1>
+        <p>Deadlock Avoidance & Resource Allocation</p>
+    </div>
+
+    <div class="container">
+        <!-- LEFT PANEL: INPUT & CONFIGURATION -->
+        <div class="panel left-panel">
+            <h2 class="section-title">Banker's Algorithm Configuration</h2>
+
+            <!-- Section A: System Initialization -->
+            <div class="section">
+                <h3 style="color: #34495e; margin-bottom: 15px;">System Initialization</h3>
+                
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="numProcesses">Number of Processes (n)</label>
+                        <input type="number" id="numProcesses" min="1" max="10" value="5">
+                    </div>
+                    <div class="input-group">
+                        <label for="numResources">Number of Resources (m)</label>
+                        <input type="number" id="numResources" min="1" max="10" value="3">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="generateMatrices()">Generate Matrices</button>
+
+                <div id="matricesContainer"></div>
+
+                <div style="margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="runSafetyCheck()">Run Initial Safety Check</button>
+                </div>
+            </div>
+
+            <!-- Section B: Dynamic Resource Request -->
+            <div class="section">
+                <h3 style="color: #34495e; margin-bottom: 15px;">Dynamic Resource Request</h3>
+                
+                <div class="input-group">
+                    <label for="processSelect">Select Process</label>
+                    <select id="processSelect">
+                        <option value="">-- Select Process --</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Request Vector</label>
+                    <div id="requestVectorContainer"></div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="submitRequest()">Submit Resource Request</button>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: OUTPUT & VISUALIZATION -->
+        <div class="panel right-panel">
+            <h2 class="section-title">Algorithm Output & Step-by-Step Simulation</h2>
+
+            <!-- Status Box -->
+            <div id="statusBox" class="status-box status-pending">
+                SYSTEM STATUS: Awaiting Initial Configuration
+            </div>
+
+            <!-- Need Matrix -->
+            <div class="section" id="needMatrixSection" style="display: none;">
+                <h3 style="color: #34495e; margin-bottom: 15px;">Calculated Need Matrix (Max - Allocation)</h3>
+                <div class="matrix-container" id="needMatrixContainer"></div>
+            </div>
+
+            <!-- Safe Sequence -->
+            <div id="safeSequenceBox" style="display: none;"></div>
+
+            <!-- Step-by-Step Simulation -->
+            <div class="collapsible" id="stepsSection" style="display: none;">
+                <div class="collapsible-header" onclick="toggleCollapsible()">
+                    <span>Step-by-Step Safety Algorithm Simulation</span>
+                    <span id="collapseIcon">▼</span>
+                </div>
+                <div class="collapsible-content" id="stepsContent">
+                    <div id="stepsTableContainer"></div>
+                </div>
+            </div>
+
+            <!-- Resource Request Log -->
+            <div class="section" id="logSection" style="display: none;">
+                <h3 style="color: #34495e; margin-bottom: 15px;">Resource Request Log</h3>
+                <div id="requestLog"></div>
+            </div>
+        </div>
+    </div>
+    <script src="banker's-algorithm.js"></script>
+</body>
+</html>
